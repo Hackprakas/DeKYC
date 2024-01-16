@@ -1,7 +1,7 @@
 // "use client"
 import React from 'react'
 import kyc from '../components/Is-Your-Bank-KYC-overdue_-1.png'
-import { gettokenurl } from '../../../actions/actions'
+import { gettokenurl} from '../../../actions/actions'
 import Image from 'next/image'
 const page = () => {
   

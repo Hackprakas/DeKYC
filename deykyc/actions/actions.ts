@@ -1,9 +1,9 @@
 "use server"
 import { encrypt } from 'eth-sig-util';
+// import { decrypt } from 'eth-sig-util';
 import { ThirdwebStorage } from "@thirdweb-dev/storage";
 import QRCode from 'qrcode';
-import { Wallet, ethers } from 'ethers';
-
+import {  ethers } from 'ethers';
 const secretKeys = process.env.SECRET_KEY;
 const storage = new ThirdwebStorage({
     secretKey: secretKeys,
@@ -18,6 +18,8 @@ async function datauritobuffer(datauri: string) {
     return files;
 }
 
+
+  
 export async function gettokenurl() {
     const wallet =new ethers.Wallet(process.env.PRIVATE_KEY as string);
     const details = {
@@ -31,7 +33,12 @@ export async function gettokenurl() {
         content: encrypted,
         signature:signature1
     }
-    const detailsqr=await detailtoqr(detailss);
+    const encryptionPublicKey = process.env.PUBLIC_KEY as string;
+    const encryptedMessage = encrypt(encryptionPublicKey, { data: JSON.stringify(detailss) }, 'x25519-xsalsa20-poly1305');
+    const detailsss={
+        encrypt:encryptedMessage
+    }
+    const detailsqr=await detailtoqr(detailsss);
     const nftmetadata={
         name:"samplenft",
         description:"this is a testing nft",
