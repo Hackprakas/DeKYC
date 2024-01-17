@@ -45,7 +45,7 @@ export async function gettokenurl() {
         image:detailsqr
     }
     const nfturi=await uploadtoipfs(nftmetadata);
-    const uri=`https://ipfs.io/${nfturi.substring(7)}`
+    const uri=`https://ipfs.io/ipfs/${nfturi.substring(7)}`
     const hash = await ethers.utils.solidityKeccak256(['string'], [uri]);
     const signature = await wallet.signMessage(ethers.utils.arrayify(hash));
     console.log(uri);

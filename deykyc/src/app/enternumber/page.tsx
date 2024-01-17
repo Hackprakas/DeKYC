@@ -3,6 +3,7 @@ import React from 'react'
 import kyc from '../components/Is-Your-Bank-KYC-overdue_-1.png'
 import { gettokenurl} from '../../../actions/actions'
 import Image from 'next/image'
+import { providecipher } from '../../../actions/actions2'
 const page = () => {
   
 
@@ -25,7 +26,7 @@ const page = () => {
 
       <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">User Details</h2>
       <p className="leading-relaxed mb-5 text-gray-600">Enter your Aadhar Number</p>
-        <form action={gettokenurl} >
+        <form action={providecipher} >
       <div className="relative mb-4">
 
         <label htmlFor="email" className="leading-7 text-sm text-gray-600">Aadhar Number</label>
