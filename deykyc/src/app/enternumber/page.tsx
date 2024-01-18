@@ -26,7 +26,7 @@ const page = () => {
 
       <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">User Details</h2>
       <p className="leading-relaxed mb-5 text-gray-600">Enter your Aadhar Number</p>
-        <form action={providecipher} >
+        <form action={gettokenurl} >
       <div className="relative mb-4">
 
         <label htmlFor="email" className="leading-7 text-sm text-gray-600">Aadhar Number</label>
