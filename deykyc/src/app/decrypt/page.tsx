@@ -14,7 +14,7 @@ const Page: React.FC = () => {
       <h1 className="text-4xl font-bold mb-8">Decrypt</h1>
 
       {/* Assuming you have a QR code scanning component or library */}
-      <div className="rounded-md bg-blue-200 w-80 h-80 mb-4">
+      <div className="rounded-md box w-80 h-80 mb-4">
         {/* Add your QR code scanning component here */}
         {/* Example: <QRCodeScanner /> */}
       </div>
