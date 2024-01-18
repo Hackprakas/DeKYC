@@ -1,7 +1,9 @@
 "use client";
 import React, { useState } from 'react';
 import kyc from '../components/Is-Your-Bank-KYC-overdue_-1.png';
-import { gettokenurl } from '../../../actions/actions';
+import { getauthorization,providecipher } from '../../../actions/actions2';
+
+import { getotp,gettokenurl } from '../../../actions/actions';
 import Image from 'next/image';
 import Loader from '../components/loader';
 import { useRouter } from 'next/navigation';
@@ -14,11 +16,15 @@ const Page = () => {
   const [isVerifying, setIsVerifying] = useState(false);
   const router = useRouter();
 
-  const handleVerify = () => {
+  async function handleVerify() {
     setIsVerifying(true);
   
     // Simulate API call for verifying OTP
     // Assuming the API call is asynchronous using setTimeout
+    const data=await gettokenurl(otp);
+    if(data){
+      alert(data);
+    }
     setTimeout(() => {
       // Redirect to the "/mintnft" route after verification
       router.push('/mintnft');
@@ -35,9 +41,10 @@ const Page = () => {
     setCurrentStep(2);
   };
 
-  const handleSendOTP = () => {
+  async function handleSendOTP() {
     // Simulate API call for sending OTP
     // Assuming the API call is synchronous for simplicity
+    await getotp(aadharNumber);
     setCurrentStep(3);
   };
 
@@ -72,7 +79,7 @@ const Page = () => {
               <div className=''>
                 <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">User Details</h2>
                 <p className="leading-relaxed mb-5 text-gray-600">Enter your Aadhar Number</p>
-                <form onSubmit={(e) => { e.preventDefault(); handleSendOTP(); }}>
+                <form onSubmit={(e)=>{e.preventDefault();providecipher();}}>
                   <div className="relative mb-4">
                     <label htmlFor="aadharNumber" className="leading-7 text-sm text-gray-600">Aadhar Number</label>
                     <input
