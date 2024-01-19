@@ -1,14 +1,12 @@
-"use client";
+// app/providers.tsx
+'use client'
 
-import { ThirdwebProvider, metamaskWallet } from "@thirdweb-dev/react";
+import {NextUIProvider} from '@nextui-org/react'
 
-
-export default function Providers({children,}: {
-    children: React.ReactNode
-  }) {
+export function Providers({children}: { children: React.ReactNode }) {
   return (
-    <ThirdwebProvider activeChain="mumbai" clientId={process.env.TEMPLATE_CLIENT_ID} supportedWallets={[metamaskWallet()]}>
+    <NextUIProvider>
       {children}
-    </ThirdwebProvider>
+    </NextUIProvider>
   )
 }

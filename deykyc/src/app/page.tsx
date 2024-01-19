@@ -1,20 +1,12 @@
+import Navbart from '@/components/navbar';
+import {LandingHero} from '../components/landinghero';
 
-import React from 'react';
-import Link from 'next/link';
-
-const Page = () => {
+export default function Home() {
   return (
-    <section className="flex items-center justify-center h-screen">
-      <div className="text-center">
-        <Link href="/info">
-          <button className="text-white bg-gradient-to-r from-purple-600 to-indigo-600 border-0 py-3 px-8 focus:outline-none hover:from-purple-700 hover:to-indigo-700 rounded-full text-xl">
-            Get Started
-          </button>
-        </Link>
+     <div className="w-screem min-h-screen bg-gradient-to-r from-rose-100 to-teal-100">
+        <Navbart />
+        <LandingHero />
       </div>
-    </section>
-  );
-};
+  )
+}
 
-export default Page;
- 

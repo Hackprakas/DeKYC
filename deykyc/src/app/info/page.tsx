@@ -1,108 +1,64 @@
 "use client";
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import Navbart from "@/components/navbar";
 
-const Page = () => {
-  const [isChecked, setChecked] = useState(false);
+const Cautions = () => {
+  const [isAgreed, setIsAgreed] = useState(false);
 
-  // Sample terms and conditions array
-  const termsAndConditions = [
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "Iusto quisquam culpa nam magnam fugit dolor, numquam excepturi accusamus quam.",
-    "Et tempora quia nisi repudiandae numquam dignissimos magnam rem natus qui.",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "Iusto quisquam culpa nam magnam fugit dolor, numquam excepturi accusamus quam.",
-    "Et tempora quia nisi repudiandae numquam dignissimos magnam rem natus qui.",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  ];
+  const handleConnectWallet = () => {
+    if (isAgreed) {
+      // Your logic to enable the connect wallet functionality
+      console.log("Connect Wallet button clicked!");
+    }
+  };
 
   return (
-    <>
-      <div className='px-10 '>
-      <div className='flex justify-center'>
-          <div className="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800 max-w-md" role="alert">
-            <svg className="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-            </svg>
-            <span className="sr-only">Info</span>
-            <div>
-              <span className="text-3xl ">Important!</span><br />Things to note before creating your DeKYC.
-            </div>
-          </div>
+    <div className="w-screem min-h-screen bg-gradient-to-r from-rose-50 to-teal-100">
+      <Navbart />
+      <div className="flex flex-col items-center justify-center space-y-5">
+        <h1 className="text-4xl font-bold text-center mt-10">Cautions</h1>
+        <div className="w-96 h-90">
+          <Card className=
+"p-10 h-full w-full bg-gray-300 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-100 animate-fade-in hover:transform hover:scale-105 transition-transform">
+            <h1 className="text-2xl font-bold text-center mb-3">Important to Note</h1>
+            <p className="text-sm font-medium leading-none mb-5 gap-10">
+              In order to ensure the security of your personal information, please take note of the following precautions before proceeding with the KYC process:
+            </p>
+            <ul className="list-disc list-inside text-sm font-medium leading-none space-y-2">
+              <li>Do not share your private key or any sensitive information with anyone.</li>
+              <li>Ensure you are using a secure and trusted connection when submitting your KYC details.</li>
+              <li>Verify the authenticity of the KYC platform and use official channels for submission.</li>
+              <li>Double-check the URL to make sure you are on the correct KYC portal.</li>
+            </ul>
+          </Card>
         </div>
-
-        <div className="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
-          <span className="sr-only">Info</span>
-          <div>
-            <span className="font-medium">Danger alert!</span> Change a few things up and try submitting again.
-          </div>
-        </div>
-
-        <div className="text-gray-900 mb-4">
-          <ul className="list-disc list-inside">
-            {termsAndConditions.map((term, index) => (
-              <li key={index} className="text-lg p-4 font-medium text-center">
-                {term}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className='flex items-center justify-end pb-8'>
-        <input
-            type="checkbox"
-            id="termsCheckbox"
-            className="form-checkbox h-5 w-5 text-red-700"
-            checked={isChecked}
-            onChange={() => setChecked(!isChecked)}
+        <div className="flex items-center">
+          <Checkbox
+            id="terms"
+            checked={isAgreed}
+            onClick={() => setIsAgreed(!isAgreed)}
           />
-          <Link href="/enternumber">
-            <button
-              className={`focus:outline-none flex text-white ml-4 ${
-                isChecked ? 'bg-red-700 hover:bg-red-800' : 'bg-gray-400'
-              } focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900`}
-              disabled={!isChecked}
-            >
-              I Understand and Continue
-              {isChecked && (
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="w-4 h-4 ml-1"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              )}
-            </button>
-          </Link>
-          <button
-            type="button"
-            className={`text-gray-900 bg-white ml-4 hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2`}
-            disabled={!isChecked}
+          <label
+            htmlFor="terms"
+            className="text-sm font-medium leading-none ml-2"
           >
-            Connect with MetaMask
-            {isChecked && (
-            <svg
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="w-4 h-4 ml-1"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-            )}
-          </button>
+            I have read and accept the terms and conditions
+          </label>
+        </div>
+        <div className="flex flex-row justify-between p-5 space-x-10">
+        <Button disabled={!isAgreed} onClick={handleConnectWallet}>
+          Connect Wallet
+        </Button>
+        <Button disabled>
+           Get Public Key
+        </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Page;
+export default Cautions;
