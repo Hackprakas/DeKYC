@@ -6,9 +6,8 @@ import Image from 'next/image';
 import Loader from '../components/loader';
 import { useRouter } from 'next/navigation';
 
-
 const Page = () => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(2);
   const [aadharNumber, setAadharNumber] = useState('');
   const [otp, setOtp] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
@@ -16,23 +15,19 @@ const Page = () => {
 
   const handleVerify = () => {
     setIsVerifying(true);
-  
+
     // Simulate API call for verifying OTP
     // Assuming the API call is asynchronous using setTimeout
     setTimeout(() => {
       // Redirect to the "/mintnft" route after verification
       router.push('/mintnft');
-  
+
       // Reset state
       setCurrentStep(1);
       setAadharNumber('');
       setOtp('');
       setIsVerifying(false);
     }, 5000);
-  };
-  
-  const handleGetPublicKey = () => {
-    setCurrentStep(2);
   };
 
   const handleSendOTP = () => {
@@ -41,32 +36,15 @@ const Page = () => {
     setCurrentStep(3);
   };
 
-
-
   return (
     <>
-          {isVerifying && <Loader />} 
-      <div className='flex md:flex-row justify-center items-center flex-col'>
+      {isVerifying && <Loader />} 
+      <div className='w-screem min-h-screen flex md:flex-row justify-center items-center flex-col bg-gradient-to-r from-rose-100 to-teal-100'>
         <div className='m-24'>
           <Image className='rounded-md' src={kyc} width={1200} height={1200} alt="Picture of the author" />
         </div>
 
         <div className="container px-5 py-24 flex justify-center items-center">
-          {currentStep === 1 && (
-            <>
-              <button
-                type="button"
-                onClick={handleGetPublicKey}
-                className="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2"
-              >
-                Get your Public Key
-                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </button>
-            </>
-          )}
-
           {currentStep === 2 && (
             <div className="w-auto bg-gray-100 rounded-lg p-8 flex flex-col mt-10 md:mt-0 relative shadow-md">
               <div className=''>

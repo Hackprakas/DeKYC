@@ -17,11 +17,11 @@ const page = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="w-screem min-h-screen bg-gradient-to-r from-rose-100 to-teal-100 flex flex-col items-center">
       {!showMessage && (
         <button
           type="button"
-          className="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2"
+          className="text-gray-900 mt-44 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2"
           onClick={mintNFT}
         >
           Mint your NFT
@@ -42,7 +42,7 @@ const page = () => {
       {isLoading && <Loader />}
 
       {showMessage && (
-        <div className="mt-4 p-4 border border-gray-300 rounded-md">
+        <div className="mt-24 p-4 border border-gray-300 rounded-md">
           <p className="text-lg text-green-600">Congratulations! You have successfully generated your NFT.</p>
           <div className="mt-2">
             <p className="text-gray-600">To address:</p>
