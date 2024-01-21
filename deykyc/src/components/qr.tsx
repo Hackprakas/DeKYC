@@ -1,4 +1,5 @@
 // CustomQRCodeScanner.tsx
+"use client"
 import { clear } from 'console';
 import { useEffect, useRef, useState } from 'react';
 import jsQR from 'jsqr';

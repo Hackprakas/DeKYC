@@ -15,8 +15,9 @@ export default function Navbart() {
 
   const menuItems = [
     { label: "Home", href: "/" },
-    { label: "How it works", href: "#" },
+    { label: "How it works", href: "/howitworks" },
     { label: "Decrypt", href: "/decrypt" },
+
   ];
 
   return (
@@ -40,8 +41,9 @@ export default function Navbart() {
                 {item.label}
               </Link>
             </NavbarItem>
-          ))}
+             ))}
         </div>
+       
         <div className="flex justify-end items-center">
           <NavbarItem>
             <Link href="/info">
@@ -50,6 +52,7 @@ export default function Navbart() {
               </Button>
             </Link>
           </NavbarItem>
+          
         </div>
       </NavbarContent>
 

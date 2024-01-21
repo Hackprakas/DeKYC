@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardDescription } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import Navbart from "@/components/navbar";
@@ -9,21 +9,17 @@ const Cautions = () => {
   const [isAgreed, setIsAgreed] = useState(false);
 
   const handleConnectWallet = () => {
-    if (isAgreed) {
-      // Your logic to enable the connect wallet functionality
-      console.log("Connect Wallet button clicked!");
-    }
-  };
+    console.log("connect wallet");
+  }
 
   return (
-    <div className="w-screem min-h-screen bg-gradient-to-r from-rose-50 to-teal-100">
+    <div className="w-screen min-h-screen bg-gradient-to-r from-rose-50 to-teal-100">
       <Navbart />
       <div className="flex flex-col items-center justify-center space-y-5">
         <h1 className="text-4xl font-bold text-center mt-10">Cautions</h1>
         <div className="w-96 h-90">
-          <Card className=
-"p-10 h-full w-full bg-gray-300 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-100 animate-fade-in hover:transform hover:scale-105 transition-transform">
-            <h1 className="text-2xl font-bold text-center mb-3">Important to Note</h1>
+          <Card className="p-10 h-full w-full bg-gray-300 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-100 animate-fade-in hover:transform hover:scale-105 transition-transform shadow-lg">
+            <h1 className="text-2xl font-bold text-center mb-5">Important to Note</h1>
             <p className="text-sm font-medium leading-none mb-5 gap-10">
               In order to ensure the security of your personal information, please take note of the following precautions before proceeding with the KYC process:
             </p>
@@ -49,12 +45,12 @@ const Cautions = () => {
           </label>
         </div>
         <div className="flex flex-row justify-between p-5 space-x-10">
-        <Button disabled={!isAgreed} onClick={handleConnectWallet}>
-          Connect Wallet
-        </Button>
-        <Button disabled>
-           Get Public Key
-        </Button>
+          <Button disabled={!isAgreed} onClick={handleConnectWallet}>
+            Connect Wallet
+          </Button>
+          <Button disabled>
+            Get Public Key
+          </Button>
         </div>
       </div>
     </div>
@@ -62,3 +58,4 @@ const Cautions = () => {
 };
 
 export default Cautions;
+  
