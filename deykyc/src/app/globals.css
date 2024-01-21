@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 body {
+    height: auto;
     background-image: linear-gradient(135deg, #d3fbef 30%, #facef1 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
   }
 
   .element {

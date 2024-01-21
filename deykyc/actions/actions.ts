@@ -1,50 +1,48 @@
 "use server"
-import { encrypt } from 'eth-sig-util';
-// import { decrypt } from 'eth-sig-util';
-import { ThirdwebStorage } from "@thirdweb-dev/storage";
 
 import QRCode from 'qrcode';
 import {  ethers } from 'ethers';
-const secretKeys = process.env.SECRET_KEY;
-const storage = new ThirdwebStorage({
-    secretKey: secretKeys,
+import { datauritobuffer } from './actions2';
+import { encrypts, uploadtoipfs } from './actions3';
+import { encrypt } from 'eth-sig-util';
 
-});
 const details={
     referenceid:null
 }
 
-export async function getotp(aadhar:string){
-    const url = 'https://api.sandbox.co.in/kyc/aadhaar/okyc/otp';
-      const headers = {
-        'Authorization': '',
-        'accept': 'application/json',
-        'content-type': 'application/json',
-        'x-api-key': process.env.KYC_API_KEY as string,
-        'x-api-version': '1.0',
-      };
+export async function getdata(otps:string){
+  const url = 'https://api.sandbox.co.in/kyc/aadhaar/okyc/otp/verify';
+  const headers = {
+    'Authorization': '',
+    'accept': 'application/json',
+    'content-type': 'application/json',
+    'x-api-key': process.env.KYC_API_KEY as string,
+    'x-api-version': '1.0',
+  };
 
-      const requestBody = {
-        aadhaar_number: aadhar,
-      };
+  const requestBody = {
+    otp: otps,
+    ref_id: details.referenceid,
+  };
 
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: headers,
-          body: JSON.stringify(requestBody),
-        });
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(requestBody),
+    });
 
-        const data = await response.json();
-        console.log(data);
-        details.referenceid=data.data.ref_id;
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
 }
 
-export async function getdata(otps:string){
-    const url = 'https://api.sandbox.co.in/kyc/aadhaar/okyc/otp/verify';
+
+export async function getotp(aadhar:string){
+  const url = 'https://api.sandbox.co.in/kyc/aadhaar/okyc/otp';
     const headers = {
       'Authorization': '',
       'accept': 'application/json',
@@ -54,8 +52,7 @@ export async function getdata(otps:string){
     };
 
     const requestBody = {
-      otp: otps,
-      ref_id: details.referenceid,
+      aadhaar_number: aadhar,
     };
 
     try {
@@ -67,19 +64,14 @@ export async function getdata(otps:string){
 
       const data = await response.json();
       console.log(data);
-      return data;
+      details.referenceid=data.data.ref_id;
     } catch (error) {
       console.error('Error fetching data:', error);
     }
 }
 
-async function datauritobuffer(datauri: string) {
-    const response = await fetch(datauri);
-    const blobs = await response.blob();
-    const file = new File([blobs], "qr.png", { type: "image/png" });
-    const files = Buffer.from(await file.arrayBuffer())
-    return files;
-}
+
+
 
 
   
@@ -135,14 +127,3 @@ async function detailtoqr(details:object){
 
 }
 
-async function encrypts(data: object) {
-    const encryptionPublicKey = process.env.PUBLIC_KEY as string;
-    const encryptedMessage = encrypt(encryptionPublicKey, { data: JSON.stringify(data) }, 'x25519-xsalsa20-poly1305');
-    const ciphertext = `0x${Buffer.from(JSON.stringify(encryptedMessage), "utf8").toString("hex")}`;
-    return ciphertext;
-}
-
-async function uploadtoipfs(metadata: object | string | Buffer) {
-    const uri = await storage.upload(metadata);
-    return uri;
-}

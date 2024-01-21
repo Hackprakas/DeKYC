@@ -22,6 +22,7 @@
     "qrcode": "^1.5.3",
     "react": "^18",
     "react-dom": "^18",
+    "react-webcam": "^7.2.0",
     "sodium-native": "^4.0.5"
   },
   "devDependencies": {

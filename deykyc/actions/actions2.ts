@@ -4,23 +4,29 @@ import { ethers } from "ethers";
 
 
 
-export async function providecipher(){
-    const url="https://ipfs.io/ipfs/QmWYKjf2PywTMLj1LDWWwAoNXubnkosbGcomvMh52zzw9K/0";
-    const response=await fetch(url);
+export async function providecipher(url:string){
+    const urls=`https://ipfs.io/ipfs/${url.substring(7)}`;
+    const response=await fetch(urls);
     const data=await response.json();
     console.log(data.encrypt);
     const originaldata=JSON.parse(decrypt(data.encrypt,process.env.PRIVATE_KEY as string));
     const address= ethers.utils.verifyMessage(originaldata.content ,originaldata.signature);
     if (address=="0x00bE6367428D44244a56861A0a70597c4DfcB0Fc"){
-        // console.log(originaldata);
-        const originalda=JSON.parse(decrypt(data.encrypt,process.env.PRIVATE_KEY as string));
-        return originalda;
-        console.log(originalda)
-    }
-    else{
+        console.log(originaldata.content);
+      }
+      else{
         console.log("bitch");
-    }}
+      }
+    
+      return originaldata.content;
+    }
+   
 
+export async function name(names:string){
+  const greeting=`hello${names}`;
+  console.log(greeting);
+  return greeting;
+}
 export async function getauthorization(){
     const url = 'https://api.sandbox.co.in/authenticate';
       const headers = {
@@ -42,6 +48,18 @@ export async function getauthorization(){
         console.error('Error fetching data:', error);
       }
 }
+
+
+export async function datauritobuffer(datauri: string) {
+  const response = await fetch(datauri);
+  const blobs = await response.blob();
+  const file = new File([blobs], "qr.png", { type: "image/png" });
+  const files = Buffer.from(await file.arrayBuffer())
+  return files;
+}
+
+
+
 
 
 
