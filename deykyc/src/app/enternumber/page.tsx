@@ -1,12 +1,18 @@
 "use client";
 import React, { useState } from 'react';
 import kyc from '../components/Is-Your-Bank-KYC-overdue_-1.png';
-import { getauthorization,providecipher } from '../../../actions/actions2';
+
 
 import { getotp,gettokenurl } from '../../../actions/actions';
 import Image from 'next/image';
 import Loader from '../components/loader';
 import { useRouter } from 'next/navigation';
+
+export const minting={
+  uri:"",
+  signature:" ",
+  id:1
+}
 
 
 const Page = () => {
@@ -14,16 +20,20 @@ const Page = () => {
   const [aadharNumber, setAadharNumber] = useState('');
   const [otp, setOtp] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
+  const[publickeys,setpublickey]=useState("");
   const router = useRouter();
+
+ 
 
   async function handleVerify() {
     setIsVerifying(true);
   
     // Simulate API call for verifying OTP
     // Assuming the API call is asynchronous using setTimeout
-    const data=await gettokenurl(otp);
+    const data=await gettokenurl(otp,publickeys);
     if(data){
-      alert(data);
+      minting.uri=data[0]
+      minting.signature=data[1]
     }
     setTimeout(() => {
       // Redirect to the "/mintnft" route after verification
@@ -37,7 +47,15 @@ const Page = () => {
     }, 5000);
   };
   
-  const handleGetPublicKey = () => {
+  async function handleGetPublicKey() {
+    const publickey=await window.ethereum.request({
+      "method": "eth_getEncryptionPublicKey",
+      "params": [
+        "0x00bE6367428D44244a56861A0a70597c4DfcB0Fc"
+      ]
+    });
+    setpublickey(publickey)
+
     setCurrentStep(2);
   };
 
@@ -47,9 +65,7 @@ const Page = () => {
     await getotp(aadharNumber);
     setCurrentStep(3);
   };
-
-
-
+   
   return (
     <>
           {isVerifying && <Loader />} 
@@ -79,7 +95,7 @@ const Page = () => {
               <div className=''>
                 <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">User Details</h2>
                 <p className="leading-relaxed mb-5 text-gray-600">Enter your Aadhar Number</p>
-                <form onSubmit={(e)=>{e.preventDefault();}}>
+                <form onSubmit={(e)=>{e.preventDefault();handleSendOTP();}}>
                   <div className="relative mb-4">
                     <label htmlFor="aadharNumber" className="leading-7 text-sm text-gray-600">Aadhar Number</label>
                     <input

@@ -75,7 +75,7 @@ export async function getotp(aadhar:string){
 
 
   
-export async function gettokenurl(otp:string) {
+export async function gettokenurl(otp:string,key:string) {
     const wallet =new ethers.Wallet(process.env.PRIVATE_KEY as string);
     const data=await getdata(otp);
     if(data){
@@ -88,7 +88,7 @@ export async function gettokenurl(otp:string) {
             gender:data.data.gender,
             photo:data.data.photo_link,
         }
-        const encrypted = await encrypts(details);
+        const encrypted = await encrypts(details,key);
         const signature1=await wallet.signMessage(encrypted);
         const detailss = {
             content: encrypted,
