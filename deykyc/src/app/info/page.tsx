@@ -5,38 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import Navbart from "@/components/navbar";
 
-// CustomModal component
-const CustomModal = ({ closeModal, onConfirm, content }) => {
-  return (
-    <div className="fixed -inset-10 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-gradient-to-r from-rose-100 to-teal-100 p-8 m-2 rounded-lg max-w-md w-full">
-        <div className="flex justify-end">
-          <button onClick={closeModal} className="text-gray-600 hover:text-gray-900">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="w-6 h-6"
-              viewBox="0 0 24 24"
-            >
-              <path d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-        {/* Add content of the modal here */}
-        <p className="text-gray-800 text-lg">
-          {content}
-        </p>
-        <button onClick={onConfirm} className="bg-black text-white p-2 mt-4 rounded-md">
-          OK
-        </button>
-      </div>
-    </div>
-  );
-};
+
 
 const Cautions = () => {
   const [isAgreed, setIsAgreed] = useState(false);
@@ -96,14 +65,6 @@ const Cautions = () => {
             Get Public Key
           </Button>
         </div>
-        {/* Custom Modal */}
-        {isModalOpen && (
-          <CustomModal
-            closeModal={() => setIsModalOpen(false)}
-            onConfirm={handleConfirmConnectWallet}
-            content="Do you want to connect your wallet?"
-          />
-        )}
       </div>
     </div>
   );

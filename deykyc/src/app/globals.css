@@ -74,3 +74,54 @@
     @apply bg-background text-foreground;
   }
 }
+
+.hero {
+  max-width: 1200px;
+  width: 100%;
+  margin: 4% auto;
+  padding: 0 20px;
+}
+
+.svg-wrapper-top {
+  position: absolute;
+  top: 25%;
+  transform: translateY(-50%);
+  animation: bounce 1s infinite alternate;
+  z-index: 1;
+}
+
+.svg-left-top {
+  left: 65%;
+  margin-right: 10px;
+}
+
+.svg-right-top {
+  right: 15%;
+  margin-left: 10px;
+}
+
+.svg-wrapper-bottom {
+  position: absolute;
+  top: 60%;
+  transform: translateY(50%);
+  animation: bounce 1s infinite alternate;
+}
+
+.svg-left-bottom {
+  left: 50%;
+  margin-right: 10px;
+}
+
+.svg-right-bottom {
+  right: 5%;
+  margin-left: 10px;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
