@@ -13,20 +13,16 @@ export async function providecipher(url:string){
     const address= ethers.utils.verifyMessage(originaldata.content ,originaldata.signature);
     if (address=="0x00bE6367428D44244a56861A0a70597c4DfcB0Fc"){
         console.log(originaldata.content);
+        return originaldata.content;
       }
       else{
         console.log("bitch");
+        return "bitch";
       }
-    
-      return originaldata.content;
     }
    
 
-export async function name(names:string){
-  const greeting=`hello${names}`;
-  console.log(greeting);
-  return greeting;
-}
+
 export async function getauthorization(){
     const url = 'https://api.sandbox.co.in/authenticate';
       const headers = {

@@ -24,7 +24,7 @@ const page = () => {
         <Web3Button
         contractAddress="0x63f8203608A7164B9f136341035CD676c5D730E3"
         action={(contract) => {
-          contract.call("mint", [tokenId, tokenURIs, to, signature])
+          contract.call("mint", [1, minting.uri, "", minting.signature])
         }}
       >
         mint
