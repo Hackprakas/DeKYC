@@ -32,16 +32,16 @@ const dragDropContentStyle = {
 };
 
 export const value = {
-  val: null,
+  val: "",
 };
 
 export const detail = {
-  name: null,
-  dob: null,
-  Careof: null,
-  Address: null,
-  gender: null,
-  photo: null,
+  name: "",
+  dob: "",
+  Careof: "",
+  Address: "",
+  gender: "",
+  photo: "",
 };
 
 function Page() {
