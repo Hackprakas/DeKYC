@@ -1,9 +1,9 @@
-"use client";
-import React, { useState } from 'react';
+
+import React from 'react';
 
 const Loader = () => {
     return (
-      <div className="fixed inset-0 element flex items-center justify-center z-50">
+      <div className="w-screem min-h-screen bg-gradient-to-r from-rose-100 to-teal-100 fixed inset-0 element flex items-center justify-center z-50">
         <div className="text-white text-center">
           <div className="mb-4">
             <svg

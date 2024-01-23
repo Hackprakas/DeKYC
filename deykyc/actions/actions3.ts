@@ -11,8 +11,9 @@ const storage = new ThirdwebStorage({
 });
 
 export async function encrypts(data: object,key:string) {
-    const encryptionPublicKey = key as string;
-    const encryptedMessage = encrypt(encryptionPublicKey, { data: JSON.stringify(data) }, 'x25519-xsalsa20-poly1305');
+    // const encryptionPublicKey = key ;
+    console.log(key)
+    const encryptedMessage = encrypt(process.env.PUBLIC_KEY as string, { data: JSON.stringify(data) }, 'x25519-xsalsa20-poly1305');
     const ciphertext = `0x${Buffer.from(JSON.stringify(encryptedMessage), "utf8").toString("hex")}`;
     return ciphertext;
 }

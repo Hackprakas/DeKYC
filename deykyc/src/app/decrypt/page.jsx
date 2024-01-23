@@ -5,6 +5,33 @@ import { name, providecipher } from "../../../actions/actions2";
 import DecryptBtn from "../components/decryptbtn";
 import { useState, useRef } from "react";
 import jsQR from "jsqr";
+import Navbart from "../components/navbar";
+import { Card, CardBody } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+
+
+const dragDropContainerStyle = {
+  width: '100%',
+  minHeight: '200px',
+  border: '2px dashed #ddd',
+  borderRadius: '8px',
+  borderColor: 'var(--main-color)',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  cursor: 'pointer',
+  transition: 'border-color 0.3s ease',
+  backgroundColor: 'transparent',
+  marginBottom: '20px',  // Added margin-bottom
+  padding: '20px',
+};
+
+
+
+const dragDropContentStyle = {
+  textAlign: 'center',
+};
 
 export const value = {
   val: null,
@@ -19,20 +46,40 @@ export const detail = {
   photo: null,
 };
 
-const Page = () => {
+function Page() {
   const [url, seturl] = useState("");
   const [cypher, setcypher] = useState("");
   const canvasRef = useRef(null);
 
   const [file, setFile] = useState(null);
   const [data, setData] = useState(null);
+  const [fileChosen, setFileChosen] = useState(false);
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
       setFile(file);
+      setFileChosen(true); // Set the state to true when a file is chosen
     }
   };
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+  const handleScanClick = () => {
+    scanFile(file);
+  };
+
+
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const droppedFile = e.dataTransfer.files[0];
+    if (droppedFile) {
+      console.log("Dropped file:", droppedFile);
+      setFile(droppedFile);
+    }
+  };
+
 
   const scanFile = async () => {
     if (!file) return;
@@ -81,25 +128,57 @@ const Page = () => {
   }
 
   return (
-    <div className="container mx-auto p-8 flex flex-col items-center">
-      <h1 className="text-4xl font-bold mb-8">Decrypt</h1>
-      <div></div>
+    <>
+      <Navbart />
+      
+      <div className="flex flex-col items-center justify-center gap-24 w-screen min-h-screen bg-gradient-to-r from-rose-50 to-teal-100">
+  <h1 className="text-4xl font-bold mb-8">Decrypt</h1>
 
-      <div className={value.val && "hidden"}>
-        <h2 className="text-2xl font-medium text-gray-900 dark:text-white  mb-8">
-          Scan Qr from file
-        </h2>
-        <input type="file" onChange={handleFileChange} />
-        <button
-          onClick={scanFile}
-          className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:bg-opacity-20"
-        >
-          Scan QR code
-        </button>
-        <canvas ref={canvasRef} style={{ display: "none" }} />
+  <div className={value.val && "hidden"}>
+    <h2 className="text-2xl text-center font-medium text-gray-900 dark:text-white py-8">
+      Scan QR from file
+    </h2>
+    <div
+      style={dragDropContainerStyle}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      onClick={() => {
+        const inputElement = document.getElementById('fileInput');
+        if (inputElement) {
+          inputElement.click();
+        }
+      }}
+    >
+      <input
+        type="file"
+        id="fileInput"
+        accept=".pdf, .jpeg, .jpg, .png, .html"
+        onChange={handleFileChange}
+        multiple
+        className="hidden"
+      />
+      <div style={dragDropContentStyle}>
+        {fileChosen ? (
+          <p>File chosen: {file.name}</p>
+        ) : (
+          <p>Drag and drop files here or click to select files</p>
+        )}
       </div>
-      {value.val && <DecryptBtn cypher={value.val} />}
     </div>
+    <div className="my-4">
+      <Button
+        onClick={handleScanClick}
+      >
+        Scan QR code
+      </Button>
+    </div>
+    <canvas ref={canvasRef} style={{ display: "none" }} />
+  </div>
+
+  {value.val && <DecryptBtn cypher={value.val} />}
+</div>
+
+    </>
   );
 };
 

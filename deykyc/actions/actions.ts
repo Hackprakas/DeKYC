@@ -13,7 +13,7 @@ const details={
 export async function getdata(otps:string){
   const url = 'https://api.sandbox.co.in/kyc/aadhaar/okyc/otp/verify';
   const headers = {
-    'Authorization': '',
+    'Authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJBUEkiLCJyZWZyZXNoX3Rva2VuIjoiZXlKaGJHY2lPaUpJVXpVeE1pSjkuZXlKaGRXUWlPaUpCVUVraUxDSnpkV0lpT2lKeVlYWnBjbTlvYVhSb0xtRXVNakF5TVM1amMyVkFjbWwwWTJobGJtNWhhUzVsWkhVdWFXNGlMQ0poY0dsZmEyVjVJam9pYTJWNVgyeHBkbVZmTlc1dFluTlhjV1p4Ym5KNGJEbFdNVEZzZDFObVlrcEhOM0ZtVm1ka1dtUWlMQ0pwYzNNaU9pSmhjR2t1YzJGdVpHSnZlQzVqYnk1cGJpSXNJbVY0Y0NJNk1UY3pOell4TVRBek1pd2lhVzUwWlc1MElqb2lVa1ZHVWtWVFNGOVVUMHRGVGlJc0ltbGhkQ0k2TVRjd05UazRPRFl6TW4wLkdCNzRDRTUwN3gyYkFwVWk2blRIby1qRWdRNGJkNG9wbklCMVpKc3dQUzNqRXJlWHR2U2RHTzJOQjB1SkwteGRoY2hrLVAzdmhoME1pZm14Qi1rUmd3Iiwic3ViIjoicmF2aXJvaGl0aC5hLjIwMjEuY3NlQHJpdGNoZW5uYWkuZWR1LmluIiwiYXBpX2tleSI6ImtleV9saXZlXzVubWJzV3FmcW5yeGw5VjExbHdTZmJKRzdxZlZnZFpkIiwiaXNzIjoiYXBpLnNhbmRib3guY28uaW4iLCJleHAiOjE3MDYwNzUwMzIsImludGVudCI6IkFDQ0VTU19UT0tFTiIsImlhdCI6MTcwNTk4ODYzMn0.NnqIvk0gygcmiegTyeNMFJgt5z-QX1BXq8pAjREbapk36bSTmAaSqQPgrMnyfeIzssUTpPzOmjj2lBB90KiL4g',
     'accept': 'application/json',
     'content-type': 'application/json',
     'x-api-key': process.env.KYC_API_KEY as string,
@@ -44,7 +44,7 @@ export async function getdata(otps:string){
 export async function getotp(aadhar:string){
   const url = 'https://api.sandbox.co.in/kyc/aadhaar/okyc/otp';
     const headers = {
-      'Authorization': '',
+      'Authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJBUEkiLCJyZWZyZXNoX3Rva2VuIjoiZXlKaGJHY2lPaUpJVXpVeE1pSjkuZXlKaGRXUWlPaUpCVUVraUxDSnpkV0lpT2lKeVlYWnBjbTlvYVhSb0xtRXVNakF5TVM1amMyVkFjbWwwWTJobGJtNWhhUzVsWkhVdWFXNGlMQ0poY0dsZmEyVjVJam9pYTJWNVgyeHBkbVZmTlc1dFluTlhjV1p4Ym5KNGJEbFdNVEZzZDFObVlrcEhOM0ZtVm1ka1dtUWlMQ0pwYzNNaU9pSmhjR2t1YzJGdVpHSnZlQzVqYnk1cGJpSXNJbVY0Y0NJNk1UY3pOell4TVRBek1pd2lhVzUwWlc1MElqb2lVa1ZHVWtWVFNGOVVUMHRGVGlJc0ltbGhkQ0k2TVRjd05UazRPRFl6TW4wLkdCNzRDRTUwN3gyYkFwVWk2blRIby1qRWdRNGJkNG9wbklCMVpKc3dQUzNqRXJlWHR2U2RHTzJOQjB1SkwteGRoY2hrLVAzdmhoME1pZm14Qi1rUmd3Iiwic3ViIjoicmF2aXJvaGl0aC5hLjIwMjEuY3NlQHJpdGNoZW5uYWkuZWR1LmluIiwiYXBpX2tleSI6ImtleV9saXZlXzVubWJzV3FmcW5yeGw5VjExbHdTZmJKRzdxZlZnZFpkIiwiaXNzIjoiYXBpLnNhbmRib3guY28uaW4iLCJleHAiOjE3MDYwNzUwMzIsImludGVudCI6IkFDQ0VTU19UT0tFTiIsImlhdCI6MTcwNTk4ODYzMn0.NnqIvk0gygcmiegTyeNMFJgt5z-QX1BXq8pAjREbapk36bSTmAaSqQPgrMnyfeIzssUTpPzOmjj2lBB90KiL4g',
       'accept': 'application/json',
       'content-type': 'application/json',
       'x-api-key': process.env.KYC_API_KEY as string,
@@ -77,17 +77,18 @@ export async function getotp(aadhar:string){
   
 export async function gettokenurl(otp:string,key:string) {
     const wallet =new ethers.Wallet(process.env.PRIVATE_KEY as string);
-    const data=await getdata(otp);
-    if(data){
+    // const data=await getdata(otp);
+    // if(data){
 
         const details = {
-            name: data.data.name,
-            dob: data.data.dob,
-            Careof:data.data.care_of,
-            Address:data.data.address,
-            gender:data.data.gender,
-            photo:data.data.photo_link,
+            name: "Raj",
+            dob:  "1999-01-01",
+            // Careof:data.data.care_of,
+            // Address:data.data.address,
+            // gender:data.data.gender,
+            // photo:data.data.photo_link,
         }
+        
         const encrypted = await encrypts(details,key);
         const signature1=await wallet.signMessage(encrypted);
         const detailss = {
@@ -103,7 +104,7 @@ export async function gettokenurl(otp:string,key:string) {
         const nftmetadata={
             name:"samplenft",
             description:"this is a testing nft",
-            image:detailsqr
+            image:`https://ipfs.io/ipfs/${detailsqr.substring(7)}`
         }
         const nfturi=await uploadtoipfs(nftmetadata);
         const uri=`https://ipfs.io/ipfs/${nfturi.substring(7)}`
@@ -114,7 +115,7 @@ export async function gettokenurl(otp:string,key:string) {
         
         return [uri,signature];
     }
-}
+  
 
 
 async function detailtoqr(details:object){
