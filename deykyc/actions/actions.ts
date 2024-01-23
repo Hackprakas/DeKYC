@@ -77,16 +77,16 @@ export async function getotp(aadhar:string){
   
 export async function gettokenurl(otp:string,key:string) {
     const wallet =new ethers.Wallet(process.env.PRIVATE_KEY as string);
-    // const data=await getdata(otp);
-    // if(data){
+    const data=await getdata(otp);
+    if(data){
 
         const details = {
-            name: "Raj",
-            dob:  "1999-01-01",
-            // Careof:data.data.care_of,
-            // Address:data.data.address,
-            // gender:data.data.gender,
-            // photo:data.data.photo_link,
+            name:data.data.name,
+            dob:data.data.dob,
+            Careof:data.data.care_of,
+            Address:data.data.address,
+            gender:data.data.gender,
+            photo:data.data.photo_link,
         }
         
         const encrypted = await encrypts(details,key);
@@ -103,7 +103,7 @@ export async function gettokenurl(otp:string,key:string) {
         const detailsqr=await detailtoqr(detailsss);
         const nftmetadata={
             name:"samplenft",
-            description:"this is a testing nft",
+            description:"this is a testing nft sample of kyc",
             image:`https://ipfs.io/ipfs/${detailsqr.substring(7)}`
         }
         const nfturi=await uploadtoipfs(nftmetadata);
@@ -127,4 +127,4 @@ async function detailtoqr(details:object){
     return buffertoipfs;
 
 }
-
+}

@@ -6,6 +6,10 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Car } from 'lucide-react';
 import { ConnectWallet } from "@thirdweb-dev/react";
+import { useAddress } from "@thirdweb-dev/react";
+import {Button} from "../../components/ui/button";
+import Image from 'next/image';
+import NFTQR from '../images/NFTQR.png';
 
 
 type prog = {
@@ -14,6 +18,7 @@ type prog = {
 
 function decryptbtn(cypher: prog) {
   const [value, setvalue] = useState(false);
+  const address=useAddress();
 
   const [addr, setaddr] = useState("");
   async function handleclick() {
@@ -44,7 +49,7 @@ function decryptbtn(cypher: prog) {
       "method": "eth_decrypt",
       "params": [
         cypher.cypher,
-        "0x00be6367428d44244a56861a0a70597c4dfcb0fc"
+        address
       ]
     });
     const data = JSON.parse(details);
@@ -62,12 +67,36 @@ function decryptbtn(cypher: prog) {
   }
 
   return (<>
-    <button onClick={handleclick} className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">connect</button>
-    {addr && (<button onClick={handle} className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Decrypt</button>)}
+
+    {!address && (<button onClick={handleclick} className=" mt-12 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">connect</button>)}
+    {address && !detail.name && (<Card className="p-12 mr-12 flex flex-col items-center gap-8 bg-slate-200 border-none animate-fade-in text-black shadow-lg">
+    <div className='w-44 h-44'>
+                  <Image className='rounded-md' src={NFTQR} width={1200} height={1200} alt="Picture of the author" />
+        </div>
+     <Button onClick={handle} className="text-white bg-black shadow-lg font-medium  text-sm px-5 py-2.5 text-center me-2 mb-2 ">Decrypt
+    <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="w-4 h-4 ml-1"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+    </Button>
+    </Card>)}
+    
 
     {value && (
 
-      <Card className="bg-slate-200 mx-64 border-none  flex items-center justify-center text-black shadow-lg px-8" >
+     <>
+     <h1 className='text-2xl text-center  text-green-600 font-bold mb-4'>
+      Congradulations! Your details are decrypted.
+     </h1>
+     
+     <Card className="bg-slate-200 mx-64 border-none  flex items-center justify-center text-black shadow-lg px-8" >
         <div className="flex-shrink-0 overflow-hidden">
           <img className="h-48 w-full object-cover md:w-48 rounded-full" src={`data:image/jpeg;base64,${detail.photo}`} alt="User photo" />
         </div>
@@ -117,7 +146,7 @@ function decryptbtn(cypher: prog) {
 
         </CardContent>
       </Card>
-
+     </>
     )}
 
   </>

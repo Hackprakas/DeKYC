@@ -1,46 +1,39 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import Navbart from "../components/navbar";
 import { ConnectWallet } from "@thirdweb-dev/react";
 import { useAddress } from "@thirdweb-dev/react";
+import { useRouter } from "next/navigation";
 
 
 
 
-export const key={
-  publicKey:''
+export const key = {
+  publicKey: ''
 }
 
 const Cautions = () => {
   const [isAgreed, setIsAgreed] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const router = useRouter();
   const address = useAddress();
 
-  
- 
-
-  async function handleGetPublicKey() {
-    const publickeys=await window.ethereum.request({
-      "method": "eth_getEncryptionPublicKey",
-      "params": [
-        address
-      ]
-    });
-    key.publicKey=publickeys
-    console.log(key.publicKey)
-
-    window.location.href = '/enternumber';
-    
+useEffect(() => {
+  if ( address && isAgreed) {
+    router.push("/enternumber");
   }
+}
+, [address, isAgreed]);
+
+
+
 
   return (
     <div className="w-screen min-h-screen bg-gradient-to-r from-rose-50 to-teal-100">
       <Navbart />
-      
+
       <div className="flex flex-col items-center justify-center space-y-5">
         <h1 className="text-4xl font-bold text-center mt-10">Cautions</h1>
         <div className="w-96 h-90">
@@ -61,8 +54,11 @@ const Cautions = () => {
           <Checkbox
             id="terms"
             checked={isAgreed}
-            onClick={() => setIsAgreed(!isAgreed)}
+            onClick={() => {
+              setIsAgreed(!isAgreed);
+            }}
           />
+
           <label
             htmlFor="terms"
             className="text-sm font-medium leading-none ml-2"
@@ -74,18 +70,16 @@ const Cautions = () => {
           {/* <Button disabled={!isAgreed || isWalletConnected} onClick={handleConnectWallet}>
             {isWalletConnected ? "Wallet Connected" : "Connect Wallet"}
           </Button> */}
+
           {isAgreed && (
 
             <ConnectWallet
-            style={{backgroundColor:"black",color:"white"}}
+              style={{ backgroundColor: "black", color: "white" }}
+              
             />
-          )}
-          {address && isAgreed && (
 
-          <Button onClick={handleGetPublicKey}>
-            Get Public Key
-          </Button>
           )}
+
         </div>
       </div>
     </div>

@@ -1,12 +1,10 @@
 "use client";
 import React from "react";
-import { name, providecipher } from "../../../actions/actions2";
-// import Qrreader from "../components/qrscanner"
+import { providecipher } from "../../../actions/actions2";
 import DecryptBtn from "../components/decryptbtn";
 import { useState, useRef } from "react";
 import jsQR from "jsqr";
 import Navbart from "../components/navbar";
-import { Card, CardBody } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 
 
@@ -47,7 +45,6 @@ export const detail = {
 };
 
 function Page() {
-  const [url, seturl] = useState("");
   const [cypher, setcypher] = useState("");
   const canvasRef = useRef(null);
 
@@ -130,9 +127,13 @@ function Page() {
   return (
     <>
       <Navbart />
-      
       <div className="flex flex-col items-center justify-center gap-24 w-screen min-h-screen bg-gradient-to-r from-rose-50 to-teal-100">
-  <h1 className="text-4xl font-bold mb-8">Decrypt</h1>
+      
+     {!value.val ? (
+   
+  <h1 className="text-4xl font-bold mb-24">Decrypt</h1>
+     
+     ):(<></>)}
 
   <div className={value.val && "hidden"}>
     <h2 className="text-2xl text-center font-medium text-gray-900 dark:text-white py-8">

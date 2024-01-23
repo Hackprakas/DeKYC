@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "src/app/api/kyc/route.js", "src/app/decrypt/page.jsx"  ],
+, "src/app/api/kyc/route.js", "src/app/decrypt/page.jsx", "src/app/components/provider.tsx"  ],
   "exclude": [
     "node_modules"
   ]
