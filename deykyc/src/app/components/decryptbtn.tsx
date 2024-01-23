@@ -16,7 +16,7 @@ type prog = {
   cypher: string
 }
 
-function decryptbtn(cypher: prog) {
+function Decryptbtn(cypher: prog) {
   const [value, setvalue] = useState(false);
   const address=useAddress();
 
@@ -153,4 +153,4 @@ function decryptbtn(cypher: prog) {
   )
 }
 
-export default decryptbtn
+export default Decryptbtn;

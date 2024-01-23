@@ -311,7 +311,7 @@ const Page = () => {
                 </div>
                 {/* Display "Copied!" message conditionally */}
                 {isCopied && <p className="text-green-500">Copied!</p>}
-                <p className='text-xs text-gray-500 mt-4 -mb-8'>You can view this NFT by clicking on "Import NFT" from Metamask by pasting the contract address and tokenid.</p>
+                <p className='text-xs text-gray-500 mt-4 -mb-8'>You can view this NFT by clicking on Import NFT from Metamask by pasting the contract address and tokenid.</p>
               </Card>
             </>
 
