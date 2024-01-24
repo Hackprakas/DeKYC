@@ -1,19 +1,18 @@
-# SecureKYC
+# DeKYC
 
-SecureKYC is a revolutionary identity verification solution that leverages blockchain, Non-Fungible Tokens (NFTs), and decentralized storage to establish a new standard for secure, user-centric, and globally applicable identity verification in the digital era.
+DeKYC is a revolutionary identity verification solution that leverages blockchain, Non-Fungible Tokens (NFTs), and decentralized storage to establish a new standard for secure, user-centric, and globally applicable identity verification in the digital era.
 
 ## Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
 - [How It Works](#how-it-works)
-- [Getting Started](#getting-started)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Overview
 
-The current challenge in identity verification lies in the repetitive and cumbersome nature of KYC processes across multiple platforms, leading to inconvenience for users and posing risks to data privacy. SecureKYC addresses these issues by providing a seamless, secure, and efficient identity verification solution.
+The current challenge in identity verification lies in the repetitive and cumbersome nature of KYC processes across multiple platforms, leading to inconvenience for users and posing risks to data privacy. DeKYC addresses these issues by providing a seamless, secure, and efficient identity verification solution.
 
 ## Features
 
@@ -42,14 +41,10 @@ The current challenge in identity verification lies in the repetitive and cumber
 5. *Efficient Verification:*
    - Entities can efficiently and securely verify user identity using the QR code associated with the NFT.
 
-## Getting Started
-
-To get started with SecureKYC, follow the steps outlined in the [Installation Guide](docs/installation.md).
-
 
 ## Contributing
 
-Contributions are welcome! Read the [Contribution Guidelines](CONTRIBUTING.md) for more information.
+Contributions are welcome!
 
 ## License
 
