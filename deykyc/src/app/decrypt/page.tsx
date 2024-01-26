@@ -243,7 +243,7 @@ export const detail: Detail = {
   photo: "",
 };
 
-const Page: React.FC = () => {
+function Page() {
   const [cypher, setCypher] = useState<string>("");
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
