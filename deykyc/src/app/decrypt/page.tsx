@@ -191,6 +191,7 @@ import DecryptBtn from "../components/decryptbtn";
 import jsQR from "jsqr";
 import Navbart from "../components/navbar";
 import { Button } from "@nextui-org/react";
+import { value } from "../components/constant";
 
 interface CodeData {
   data: string;
@@ -217,31 +218,7 @@ const dragDropContentStyle: React.CSSProperties = {
   textAlign: 'center',
 };
 
-interface Value {
-  val: string;
-}
 
-interface Detail {
-  name: string;
-  dob: string;
-  Careof: string;
-  Address: string;
-  gender: string;
-  photo: string;
-}
-
-const value: Value = {
-  val: "",
-};
-
-export const detail: Detail = {
-  name: "",
-  dob: "",
-  Careof: "",
-  Address: "",
-  gender: "",
-  photo: "",
-};
 
 function Page() {
   const [cypher, setCypher] = useState<string>("");

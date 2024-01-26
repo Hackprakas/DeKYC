@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { detail } from '../decrypt/page';
+import { detail } from './constant';
 import { revalidatePath } from 'next/cache';
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
