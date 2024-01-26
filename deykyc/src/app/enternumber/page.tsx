@@ -603,7 +603,7 @@ const Page = () => {
                 <Web3Button
                   contractAddress="0x4EE1940a4203fb64a0D74F3fc993bc828C26AdAC"
                   action={(contract) => {
-                    contract.call("mint", [21, minting.uri, address, minting.signature]
+                    contract.call("mint", [26, minting.uri, address, minting.signature]
 
                     )
                   }}
