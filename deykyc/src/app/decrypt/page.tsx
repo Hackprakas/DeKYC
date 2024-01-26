@@ -230,7 +230,7 @@ interface Detail {
   photo: string;
 }
 
-export const value: Value = {
+const value: Value = {
   val: "",
 };
 
