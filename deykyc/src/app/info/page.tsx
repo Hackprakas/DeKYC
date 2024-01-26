@@ -9,12 +9,6 @@ import { useAddress } from "@thirdweb-dev/react";
 import { useRouter } from "next/navigation";
 
 
-
-
-export const key = {
-  publicKey: ''
-}
-
 const Cautions = () => {
   const [isAgreed, setIsAgreed] = useState(false);
   const router = useRouter();
