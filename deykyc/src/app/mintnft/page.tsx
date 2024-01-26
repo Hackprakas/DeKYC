@@ -5,7 +5,7 @@ import { Web3Button } from '@thirdweb-dev/react';
 import Loader from '../components/loader';
 import { minting } from '../enternumber/page';
 
-const page = () => {
+const Page = () => {
   const [isLoading, setLoading] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 
@@ -51,4 +51,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
