@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Web3Button } from '@thirdweb-dev/react';
 import Loader from '../components/loader';
-import { minting } from '../enternumber/page';
+import { minting } from '../components/constant';
 
 const Page = () => {
   const [isLoading, setLoading] = useState(false);
