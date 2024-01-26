@@ -366,6 +366,8 @@ const Page: React.FC = () => {
             </div>
           </div>
           <div className="my-4">
+            {/* this is some bullshit */}
+            {/* this is also a bullshit */}
             <Button onClick={handleScanClick}>Scan QR code</Button>
           </div>
           <canvas ref={canvasRef} style={{ display: "none" }} />
