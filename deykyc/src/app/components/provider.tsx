@@ -14,6 +14,17 @@ export default function Providers({ children, }: {
       supportedWallets={[
       metamaskWallet()
       ]}
+      sdkOptions={
+        {
+          gasless:{
+            biconomy:{
+              apiId:process.env.API_ID,
+              apiKey:process.env.API_KEY,
+              deadlineSeconds:3600
+            }
+          }
+        }
+      }
     >
       {children}
 

@@ -203,29 +203,13 @@ const Page = () => {
                 <Web3Button
                   contractAddress="0x4EE1940a4203fb64a0D74F3fc993bc828C26AdAC"
                   action={(contract) => {
-                    contract.call("mint", [generateRandomNumber(), minting.uri, address, minting.signature]);
+                    contract.call("mint", [79, minting.uri, address, minting.signature]);
                   }}
-                  onSubmit={() => setTimeout(() => {
-                    setIsMinting(true);
-                  }, 3000)}
-
-                  onSuccess={() => setIsMinting(false)}
+                 onSuccess={()=>alert("minted sucessfully")}
                 
-                  style={{ backgroundColor: 'black', color: 'white', borderRadius: '10px', padding: '10px', fontSize: '15px' }}
+                 style={{ backgroundColor: 'black', color: 'white', borderRadius: '10px', padding: '10px', fontSize: '15px' }}
                 >
-                  Mint Your NFT
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-4 h-4 ml-1"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                  </svg>
-                </Web3Button>
+                  Mint Your NFT </Web3Button>
               </Card>
 
             </>
