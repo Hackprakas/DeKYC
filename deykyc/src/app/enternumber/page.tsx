@@ -13,7 +13,7 @@ import { getotp, gettokenurl } from '../../../actions/actions';
 import { Web3Button } from "@thirdweb-dev/react";
 import { useAddress } from "@thirdweb-dev/react";
 import { minting } from '../components/constant';
-import {key} from "../components/constant"
+import { key } from "../components/constant"
 import Navbart from "../components/navbar";
 
 

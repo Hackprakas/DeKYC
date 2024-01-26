@@ -23,3 +23,14 @@ interface Value {
     gender: "",
     photo: "",
   };
+
+  export const minting = {
+    uri: "",
+    signature: " ",
+    id: 1
+  }
+  
+  export const key={
+    publickey:""
+  }
+  
