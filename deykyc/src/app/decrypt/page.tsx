@@ -128,11 +128,11 @@
 //     <>
 //       <Navbart />
 //       <div className="flex flex-col items-center justify-center gap-24 w-screen min-h-screen bg-gradient-to-r from-rose-50 to-teal-100">
-      
+
 //      {!value.val ? (
-   
+
 //   <h1 className="text-4xl font-bold mb-24">Decrypt</h1>
-     
+
 //      ):(<></>)}
 
 //   <div className={value.val && "hidden"}>
@@ -192,6 +192,9 @@ import jsQR from "jsqr";
 import Navbart from "../components/navbar";
 import { Button } from "@nextui-org/react";
 import { value } from "../components/constant";
+import { useAddress } from "@thirdweb-dev/react";
+import { ConnectWallet } from "@thirdweb-dev/react";
+import { Card } from "@/components/ui/card";
 
 interface CodeData {
   data: string;
@@ -223,7 +226,7 @@ const dragDropContentStyle: React.CSSProperties = {
 function Page() {
   const [cypher, setCypher] = useState<string>("");
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
+  const address = useAddress();
   const [file, setFile] = useState<File | null>(null);
   const [data, setData] = useState<string | null>(null);
   const [fileChosen, setFileChosen] = useState<boolean>(false);
@@ -253,7 +256,7 @@ function Page() {
     }
   };
 
-  async function scanFile(file: File | null){
+  async function scanFile(file: File | null) {
     if (!file) return;
 
     const reader = new FileReader();
@@ -304,54 +307,58 @@ function Page() {
   return (
     <>
       <Navbart />
-      <div className="flex flex-col items-center justify-center gap-24 w-screen min-h-screen bg-gradient-to-r from-rose-50 to-teal-100">
-        {!value.val ? (
-          <h1 className="text-4xl font-bold mb-24">Decrypt</h1>
-        ) : (
-          <></>
-        )}
+      {/* <div className="bg-gradient-to-r from-rose-50 to-teal-100"> */}
+        <div className="flex flex-col items-center justify-center p-28 ">
+          <Card className={value.val ? "hidden" : "p-10  bg-gray-200 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-300 text-black drop-shadow-sm shadow-xl"}>
+          {!value.val ? (
+            <h1 className="text-4xl font-bold px-28">Decrypt</h1>
+          ) : (
+            <></>
+          )}
 
-        <div className={value.val ? "hidden" : ""}>
-          <h2 className="text-2xl text-center font-medium text-gray-900 dark:text-white py-8">
-            Scan QR from file
-          </h2>
-          <div
-            style={dragDropContainerStyle}
-            onDrop={handleDrop}
-            onDragOver={handleDragOver}
-            onClick={() => {
-              const inputElement = document.getElementById('fileInput');
-              if (inputElement) {
-                inputElement.click();
-              }
-            }}
-          >
-            <input
-              type="file"
-              id="fileInput"
-              accept=".pdf, .jpeg, .jpg, .png, .html"
-              onChange={handleFileChange}
-              multiple
-              className="hidden"
-            />
-            <div style={dragDropContentStyle}>
-              {fileChosen ? (
-                <p>File chosen: {file?.name}</p>
-              ) : (
-                <p>Drag and drop files here or click to select files</p>
-              )}
+          <div className={value.val ? "hidden" : ""}>
+            <h2 className="text-2xl text-center font-medium text-gray-900 dark:text-white py-4">
+              Scan QR from file
+            </h2>
+            <div
+              style={dragDropContainerStyle}
+              onDrop={handleDrop}
+              onDragOver={handleDragOver}
+              onClick={() => {
+                const inputElement = document.getElementById('fileInput');
+                if (inputElement) {
+                  inputElement.click();
+                }
+              }}
+            >
+              <input
+                type="file"
+                id="fileInput"
+                accept=".pdf, .jpeg, .jpg, .png, .html"
+                onChange={handleFileChange}
+                multiple
+                className="hidden"
+              />
+              <div style={dragDropContentStyle}>
+                {fileChosen ? (
+                  <p>File chosen: {file?.name}</p>
+                ) : (
+                  <p>Drag and drop files here or click to select files</p>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="my-4">
-            {/* this is some bullshit */}
-            {/* this is also a bullshit */}
-            <Button onClick={handleScanClick}>Scan QR code</Button>
-          </div>
-          <canvas ref={canvasRef} style={{ display: "none" }} />
-        </div>
+            <div>
+              {/* this is some bullshit */}
+              {/* this is also a bullshit */}
+              {!address ? (<ConnectWallet />) : (<Button onClick={handleScanClick}>Scan QR code</Button>)}
 
-        {value.val && <DecryptBtn cypher={value.val} />}
-      </div>
+            </div>
+            <canvas ref={canvasRef} style={{ display: "none" }} />
+          </div>
+          </Card>
+
+          {value.val && <DecryptBtn cypher={value.val} />}
+        </div>
     </>
   );
 };

@@ -20,55 +20,35 @@ function Decryptbtn(cypher: prog) {
   const [value, setvalue] = useState(false);
   const address=useAddress();
 
-  const [addr, setaddr] = useState("");
-  async function handleclick() {
-    const address = await window.ethereum.request({
-      "method": "eth_requestAccounts",
-      "params": []
-    });
-    setaddr(address)
-    alert(addr)
-    console.log(addr)
-
-    //  detail.name=data.name;
-    //  detail.Address=data.Address;
-    //  detail.Careof=data.Careof;
-    //  detail.gender=data.gender;
-    //  detail.dob=data.dob;
-    //  detail.photo=data.photo;
-
-    //  revalidatePath("/decrypt");
-    //data:image/jpeg;base64,
-
-  }
-
   async function handle() {
 
+    try{
 
-    const details = await window.ethereum.request({
-      "method": "eth_decrypt",
-      "params": [
-        cypher.cypher,
-        address
-      ]
-    });
-    const data = JSON.parse(details);
-    // console.log(data);
-    detail.name = data.name;
-    detail.Address = data.Address;
-    detail.Careof = data.Careof;
-    detail.gender = data.gender;
-    detail.dob = data.dob;
-    detail.photo = data.photo;
-    setvalue(true);
-
-
-
+      const details = await window.ethereum.request({
+        "method": "eth_decrypt",
+        "params": [
+          cypher.cypher,
+          address
+        ]
+      });
+      const data = JSON.parse(details);
+      // console.log(data);
+      detail.name = data.name;
+      detail.Address = data.Address;
+      detail.Careof = data.Careof;
+      detail.gender = data.gender;
+      detail.dob = data.dob;
+      detail.photo = data.photo;
+      setvalue(true);
+    }
+    catch(e){
+      alert("Connect with same wallet to decrypt the data");
+    }
   }
 
   return (<>
 
-    {!address && (<button onClick={handleclick} className=" mt-12 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">connect</button>)}
+    {!address && (<ConnectWallet/>)}
     {address && !detail.name && (<Card className="p-12 mr-12 flex flex-col items-center gap-8 bg-slate-200 border-none animate-fade-in text-black shadow-lg">
     <div className='w-44 h-44'>
                   <Image className='rounded-md' src={NFTQR} width={1200} height={1200} alt="Picture of the author" />

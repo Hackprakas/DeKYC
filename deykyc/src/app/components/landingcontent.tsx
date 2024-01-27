@@ -68,7 +68,7 @@ const LandingContent: React.FC = () => {
           <h2 className="text-4xl font-bold text-black">How it works</h2>
           <App />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-10 px-10 pb-10"> 
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 px-10 pb-10"> 
           {features.map((item) => (
             <FeatureCard key={item.title} {...item} />
           ))} 

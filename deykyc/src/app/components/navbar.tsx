@@ -4,6 +4,8 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, NavbarMenu, Navba
 import { cn } from "@/lib/utils";
 import { Montserrat } from "next/font/google";
 import { Button } from "../../components/ui/button";
+import { ConnectWallet } from "@thirdweb-dev/react";
+import { useAddress } from "@thirdweb-dev/react";
 
 const font = Montserrat({
   weight: "600",
@@ -12,6 +14,7 @@ const font = Montserrat({
 
 export default function Navbart() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const address = useAddress();
 
   const menuItems = [
     { label: "Home", href: "/" },
@@ -46,11 +49,14 @@ export default function Navbart() {
        
         <div className="flex justify-end items-center">
           <NavbarItem>
-            <Link href="/info">
-              <Button>
-                Get Started
-              </Button>
-            </Link>
+            {address ? (<ConnectWallet/>):(
+              <Link href="/info">
+                <Button >
+                  Get Started
+                </Button>
+              </Link>
+            )}
+           
           </NavbarItem>
           
         </div>
