@@ -16,6 +16,7 @@ import { minting } from '../components/constant';
 import { key } from "../components/constant"
 import Navbart from "../components/navbar";
 import dg from "../components/dg.png";
+import { getauthorization } from '../../../actions/actions2';
 
 
 
@@ -209,7 +210,7 @@ const Page = () => {
                   contractAddress="0x4EE1940a4203fb64a0D74F3fc993bc828C26AdAC"
                   action={(contract) => {
                     const number=generateRandomNumber();
-                    contract.call("mint", [number, minting.uri, address, minting.signature]);
+                    contract.call("mint", [63, minting.uri, address, minting.signature]);
                   }}
                   onSuccess={() => alert("minted sucessfully")}
 
