@@ -1,6 +1,8 @@
 "use client";
 
 import { ThirdwebProvider, metamaskWallet, smartWallet } from "@thirdweb-dev/react";
+import 'dotenv/config' ;
+
 
 
 export default function Providers({ children, }: {
@@ -18,8 +20,8 @@ export default function Providers({ children, }: {
         {
           gasless:{
             biconomy:{
-              apiId:process.env.API_ID,
-              apiKey:process.env.API_KEY,
+              apiId: "48a14ced-8ac2-4a28-a85b-f53ba65db2ba",
+              apiKey: "o3Lj6R8hU.fe485f00-20b9-4e48-ab72-fbfb4a38ea4b",
               deadlineSeconds:3600
             }
           }

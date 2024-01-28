@@ -15,6 +15,7 @@ import { useAddress } from "@thirdweb-dev/react";
 import { minting } from '../components/constant';
 import { key } from "../components/constant"
 import Navbart from "../components/navbar";
+import dg from "../components/dg.png";
 
 
 
@@ -77,12 +78,12 @@ const Page = () => {
     setCurrentStep(4);
   };
 
-  function mintNFT(){
+  function mintNFT() {
     // Simulate minting process (replace with your actual logic)
     setIsMinting(true);
 
 
- 
+
   };
   const generateRandomNumber = () => {
     // Generate a random number between 35 and 999999
@@ -99,9 +100,9 @@ const Page = () => {
     <>
       <Navbart />
       {(isVerifying || isLoading || isMinting) && <Loader />}
-      <div className=' min-h-screen flex md:flex-row justify-center items-center flex-col bg-gradient-to-r from-rose-100 to-teal-100'>
+      <div className=' min-h-screen flex  md:flex-row justify-center items-center flex-col-reverse bg-gradient-to-r from-rose-100 to-teal-100'>
         <div className='m-24'>
-          <Image className='rounded-md' src={kyc} width={900} height={900} alt="Picture of the author" />
+          <Image className='rounded-md' src={dg} width={1200} height={1200} alt="Picture of the author" />
         </div>
 
         <div className="container px-5 py-24 flex justify-center items-center">
@@ -109,17 +110,17 @@ const Page = () => {
           {currentStep === 2 && !isLoading && !isMintButtonVisible && (<>
 
 
-            <div className="w-auto bg-gray-100 rounded-lg p-8 flex flex-col md:mt-0 relative shadow-md">
+            <div className="w-auto bg-gray-100 rounded-lg p-8 flex flex-col md:mt-0 h-4/6 relative shadow-md">
               <div className=''>
                 <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">User Details</h2>
                 <p className="leading-relaxed mb-5 text-gray-600">Provide access to your public key</p>
-                
-                  <div className="relative mb-4">
-                    {/* <label htmlFor="aadharNumber" className="leading-7 text-sm text-gray-600">Aadhar Number</label> */}
-                    
-                  </div>
-                  <Button onClick={handleGetPublicKey} className="text-white bg-black hover:focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Get Public key</Button>
-                
+
+                <div className="relative mb-4">
+                  {/* <label htmlFor="aadharNumber" className="leading-7 text-sm text-gray-600">Aadhar Number</label> */}
+
+                </div>
+                <Button onClick={handleGetPublicKey} className="text-white bg-black hover:focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Get Public key</Button>
+
                 <p className="text-xs text-gray-500 mt-3">We prioritize your privacy. Rest assured, your data is not stored or retained by us.</p>
               </div>
             </div>
@@ -207,11 +208,12 @@ const Page = () => {
                 <Web3Button
                   contractAddress="0x4EE1940a4203fb64a0D74F3fc993bc828C26AdAC"
                   action={(contract) => {
-                    contract.call("mint", [79, minting.uri, address, minting.signature]);
+                    const number=generateRandomNumber();
+                    contract.call("mint", [number, minting.uri, address, minting.signature]);
                   }}
-                 onSuccess={()=>alert("minted sucessfully")}
-                
-                 style={{ backgroundColor: 'black', color: 'white', borderRadius: '10px', padding: '10px', fontSize: '15px' }}
+                  onSuccess={() => alert("minted sucessfully")}
+
+                  style={{ backgroundColor: 'black', color: 'white', borderRadius: '10px', padding: '10px', fontSize: '15px' }}
                 >
                   Mint Your NFT </Web3Button>
               </Card>
